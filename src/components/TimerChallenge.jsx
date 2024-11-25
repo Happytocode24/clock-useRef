@@ -7,10 +7,12 @@ export default function TimerChallenge({title,targetTime}){
     const[timerExpired,setTimerExperied]=useState(false)
 
     const timer = useRef();
+    const dailog = useRef();
 
     function handelStart(){
         timer.current = setTimeout(()=>{
-            setTimerExperied(true)
+            setTimerExperied(true);
+            dailog.current.showModal();
         },targetTime*1000)
         setTimerStarted(true)
     }
@@ -24,7 +26,7 @@ export default function TimerChallenge({title,targetTime}){
 
     return(
         <>
-        <ResultModal result={'You Lost'} targetTime={targetTime} />
+        <ResultModal ref={dailog} result={'You Lost'} targetTime={targetTime} />
         <section className="challenge">
         <h2>{title}</h2>
         <p className="challenge-time">
